@@ -8,8 +8,11 @@ import (
 	"github.com/venom90/dag"
 )
 
+type Payload struct {
+	ctx context.Context
+}
+
 func ExampleDAG_DescendantsFlow() {
-	ctx := context.Background()
 	// Initialize a new graph.
 	d := dag.NewDAG()
 
@@ -36,7 +39,9 @@ func ExampleDAG_DescendantsFlow() {
 	//   4
 
 	// The callback function adds its own value (ID) to the sum of parent results.
-	flowCallback := func(ctx context.Context, d *dag.DAG, id string, parentResults []dag.FlowResult) (interface{}, error) {
+	flowCallback := func(payload interface{}, d *dag.DAG, id string, parentResults []dag.FlowResult) (interface{}, error) {
+
+		payload = payload.(Payload)
 
 		v, _ := d.GetVertex(id)
 		result, _ := v.(int)
@@ -51,7 +56,11 @@ func ExampleDAG_DescendantsFlow() {
 		return result, nil
 	}
 
-	_, _ = d.DescendantsFlow(ctx, v0, nil, flowCallback)
+	pld := Payload{
+		ctx: context.Background(),
+	}
+
+	_, _ = d.DescendantsFlow(pld, v0, nil, flowCallback)
 
 	// Unordered output:
 	// 0 based on: [] returns: 0

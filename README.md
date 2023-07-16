@@ -1,5 +1,7 @@
 # dag
 
+This is a fork of [dag](https://github.com/heimdalr/dag)
+
 [![run tests](https://github.com/venom90/dag/workflows/Run%20Tests/badge.svg?branch=master)](https://github.com/venom90/dag/actions?query=branch%3Amaster)
 [![PkgGoDev](https://pkg.go.dev/badge/github.com/venom90/dag)](https://pkg.go.dev/github.com/venom90/dag)
 [![Go Report Card](https://goreportcard.com/badge/github.com/venom90/dag)](https://goreportcard.com/report/github.com/venom90/dag)
